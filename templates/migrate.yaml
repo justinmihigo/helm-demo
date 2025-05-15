@@ -1,0 +1,33 @@
+# templates/mysql-migration-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-mysql-migration"
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: mysql-client
+          image: mysql:latest
+          command:
+            - sh
+            - -c
+            - |
+              echo "Running SQL migration..."
+              mysql -h {{ include "mychart.fullname" . }}-mysql \
+                    -u root \
+                    -p$MYSQL_ROOT_PASSWORD < /scripts/init.sql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: my-secret-pw
+          volumeMounts:
+            - name: migration-sql
+              mountPath: /scripts
+      volumes:
+        - name: migration-sql
+          configMap:
+            name: mysql-migration-script
