@@ -1,0 +1,30 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: stable
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+nodeName: node1
+persistence:
+  storage: 8Gi
+  localPath: /mnt/local-persistent-volumes/mychart
+mysql:
+  auth:
+    rootPassword: my-secret-pw
+    database: mydb
+    username: myuser
+    password: mypass
+  primary:
+    service:
+      port: 3306
+      type: NodePort
+    # persistence:
+    #   enabled: true
+    #   size: 8Gi
+
+    #   runAsUser: 1001 
+

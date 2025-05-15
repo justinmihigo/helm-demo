@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "mychart.fullname" . }}
+spec:
+  capacity:
+    storage: {{ .Values.persistence.storage }}
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: demo
+    name: data-mychart-mysql-0
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: {{ include "mychart.fullname" . }}
+  local:
+    path: {{ .Values.persistence.localPath }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - {{ .Values.nodeName }}
