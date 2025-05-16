@@ -22,11 +22,11 @@ jobs:
         version: v3.14.3
 
     - name: list the private key
-      run: echo ${{ secrets.GPG_PRIVATE_KEY }}
+      run: cat ${{ secrets.GPG_PRIVATE_KEY }}
 
     - name: Import GPG private key
       run: |
-        echo ${{ secrets.GPG_PRIVATE_KEY }} | gpg --batch --import
+        echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
       env:
         GPG_PRIVATE_KEY:${{ secrets.GPG_PRIVATE_KEY }}
 
