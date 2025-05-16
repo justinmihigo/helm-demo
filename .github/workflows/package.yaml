@@ -45,9 +45,9 @@ jobs:
         GPG_PRIVATE_KEY: "${{ secrets.GPG_PRIVATE_KEY }}" #Referring secrets of github above
         GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"  
 
-    # - name: Package & sign chart
-    #   run: |
-    #     helm dependency update
+    - name: Dependency update
+      run: |
+        helm dependency update
     # - name: Move the repo to charts
     #   run: |
     #     mkdir charts
@@ -68,7 +68,7 @@ jobs:
     - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
       uses: helm/chart-releaser-action@v1.7.0
       with:
-        charts_dir: helm-demo
+        charts_dir: .
         
       env:
         CR_TOKEN: "${{ secrets.PAT }}"
