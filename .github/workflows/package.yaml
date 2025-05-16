@@ -21,9 +21,6 @@ jobs:
       with:
         version: v3.14.3
 
-    - name: list the private key
-      run: gpg --list-keys
-
     - name: Import GPG private key
       run: |
         echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
@@ -34,8 +31,7 @@ jobs:
       run: |
         helm dependency update "$CHART_DIR"
         helm package "$CHART_DIR" \
-
-          --sign --key "$SIGNING_KEY" --keyring ~/.gnupg/secring.pgp
+          --sign --key "$SIGNING_KEY" --keyring ~/.gnupg/pubring.kbx
       env:
         SIGNING_KEY: Mihigo
     
