@@ -67,13 +67,15 @@ jobs:
 
     - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
       uses: helm/chart-releaser-action@v1.7.0
-      # with:
-      #   charts_dir: ./
+      with:
+        charts_dir: helm-demo
         
       env:
         CR_TOKEN: "${{ secrets.PAT }}"
         CR_KEY: "${{ secrets.CR_KEY }}" #Key name used while creating key
         CR_SIGN: true
+        CR_SKIP_EXISTING: false
+        CR_MARK_AS_LATEST: true
 
     # - name: Create secring.pgp to sign
     #   run: gpg --export-secret-keys > ~/.gnupg/secring.gpg
