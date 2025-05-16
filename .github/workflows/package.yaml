@@ -14,12 +14,12 @@ jobs:
       REGISTRY: ${{ secrets.HELM_REGISTRY }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@4
+        uses: actions/checkout@3
       
       - name: Set up Helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v4.3.0
         with:
-          version: v3.14.2
+          version: v3.14.3
 
       - name: list directories 
         run: ls -la
@@ -34,7 +34,7 @@ jobs:
         run: |
           helm dependency update "$CHART_DIR"
           helm package "$CHART_DIR" \
-            --version "${CHART_VERSION#v}" \
+
             --sign --key "$SIGNING_KEY" --keyring ~/.gnupg/secring.pgp
         env:
           SIGNING_KEY: Mihigo
