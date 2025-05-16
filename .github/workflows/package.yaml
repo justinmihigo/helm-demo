@@ -27,7 +27,7 @@ jobs:
       # env:
       #   GPG_PRIVATE_KEY:${{ secrets.GPG_PRIVATE_KEY }}
     - name: Create secring.pgp to sign
-      run: gpg --export-secret-keys > ~/.gnu/secring.pgp
+      run: gpg --export-secret-keys > ~/.gnupg/secring.gpg
 
     - name: Package & sign chart
       run: |
