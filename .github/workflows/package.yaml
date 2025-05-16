@@ -22,7 +22,7 @@ jobs:
         version: v3.14.3
 
     - name: list the private key
-      run: cat "${{ secrets.GPG_PRIVATE_KEY }}" && gpg --list-keys
+      run: gpg --list-keys
 
     - name: Import GPG private key
       run: |
