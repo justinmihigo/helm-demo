@@ -51,7 +51,7 @@ jobs:
     - name: Move the repo to charts
       run: |
         mkdir charts
-        mv !(.cr-gpg) charts
+        find . -mindepth 1 -maxdepth 1 ! -name charts ! -name .cr-gpg -exec mv -t charts {} +
         
     - name: Add repositories
       run: |
