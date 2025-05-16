@@ -55,10 +55,10 @@ jobs:
           helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
         done
 
-    - name: List path
+    - name: Get home directory
       run: |
-        pwd
-        ls
+        echo $HOME
+        
 
     - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
       uses: helm/chart-releaser-action@v1.7.0
