@@ -45,10 +45,14 @@ jobs:
         GPG_PRIVATE_KEY: "${{ secrets.GPG_PRIVATE_KEY }}" #Referring secrets of github above
         GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"  
 
-    - name: Package & sign chart
+    # - name: Package & sign chart
+    #   run: |
+    #     helm dependency update
+    - name: Move the repo to charts
       run: |
-        helm dependency update
-    
+        mkdir charts
+        mv !(.cr-gpg) charts
+        
     - name: Add repositories
       run: |
         for dir in $(ls -d ./*/); do
