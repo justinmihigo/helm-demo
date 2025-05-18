@@ -59,6 +59,7 @@ jobs:
       
     - name: Dependency update
       run: |
+        cd charts
         helm dependency update
 
     - name: Get home directory
