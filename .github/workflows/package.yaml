@@ -45,7 +45,11 @@ jobs:
         GPG_PRIVATE_KEY: "${{ secrets.GPG_PRIVATE_KEY }}" #Referring secrets of github above
         GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"  
 
+    - name: List files in .cr-gpg
+      run: ls -la .cr-gpg
 
+    - name: Create secring.pgp to sign
+      run: gpg --export-secret-keys > .cr-gpgsecring.gpg
     # - name: Move the repo to charts
     #   run: |
     #     mkdir charts
@@ -82,8 +86,7 @@ jobs:
         CR_SKIP_EXISTING: false
         CR_MARK_AS_LATEST: true
 
-    # - name: Create secring.pgp to sign
-    #   run: gpg --export-secret-keys > ~/.gnupg/secring.gpg
+
 
     # - name: Package & sign chart
     #   run: |
