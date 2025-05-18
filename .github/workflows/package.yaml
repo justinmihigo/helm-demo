@@ -51,7 +51,12 @@ jobs:
 
 
     - name: Create secring.pgp to sign
-      run: gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> .cr-gpg/secring.gpg
+      run: |
+        gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> .cr-gpg/secring.gpg
+        cp .cr-gpg/secring.gpg ~/.gnupg/secring.gpg
+        gpg --export > ~/.gnupg/pubring.gpg
+        cp ~/.gnupg/pubring.gpg .cr-gpg/pubring.gpg
+
     # - name: Move the repo to charts
     #   run: |
     #     mkdir charts
