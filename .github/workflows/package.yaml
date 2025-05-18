@@ -30,13 +30,14 @@ jobs:
 
     - name: Import GPG private key
       run: |
-        echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+        echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 -d | gpg --batch --import
+    
     - name: Prepare GPG key #this step is for using exported keys and make your github runner
       run: |
         gpg_dir=.cr-gpg
         mkdir "$gpg_dir"
         keyring="$gpg_dir/secring.gpg" #referring keyring to private key of gpg
-        base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring"
+        cat "$GPG_KEYRING_BASE64" | base64 -d > "$keyring"
         passphrase_file="$gpg_dir/passphrase"
         echo "$GPG_PASSPHRASE" > "$passphrase_file" #storing passphrase data into a file
         echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV" #saving passphrase into github-environment
