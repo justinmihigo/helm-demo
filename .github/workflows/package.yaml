@@ -47,10 +47,7 @@ jobs:
 
     - name: List files in .cr-gpg
       run: ls -la .cr-gpg
-    - name: Characteristics for .cr-gpg/secring.gpg
-      run: |
-        file .cr-gpg/secring.gpg
-        cat .cr-gpg/secring.gpg
+
 
     # - name: Create secring.pgp to sign
     #   run: gpg --export-secret-keys > .cr-gpg/secring.gpg
@@ -59,7 +56,13 @@ jobs:
     #     mkdir charts
     #     find . -mindepth 1 -maxdepth 1 -name .git ! -name charts ! -name .cr-gpg -exec mv -t charts {} +
     - name: Move CR folder to charts/templates
-      run:  mv .cr-gpg charts/templates
+      run:  mv -rf .cr-gpg charts/templates
+
+    - name: Characteristics for .cr-gpg/secring.gpg
+      run: |
+        file charts/templates/.cr-gpg/secring.gpg
+        wc .cr-gpg/secring.gpg
+        wc charts/templates/.cr-gpg/secring.gpg
         
     - name: Add repositories
       run: |
