@@ -45,9 +45,9 @@ jobs:
         GPG_PRIVATE_KEY: "${{ secrets.GPG_PRIVATE_KEY }}" #Referring secrets of github above
         GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"  
 
-    - name: Dependency update
-      run: |
-        helm dependency update
+    # - name: Dependency update
+    #   run: |
+    #     helm dependency update
     - name: Move the repo to charts
       run: |
         mkdir charts
