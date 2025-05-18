@@ -48,10 +48,10 @@ jobs:
     - name: Dependency update
       run: |
         helm dependency update
-    # - name: Move the repo to charts
-    #   run: |
-    #     mkdir charts
-    #     find . -mindepth 1 -maxdepth 1 ! -name charts ! -name .cr-gpg -exec mv -t charts {} +
+    - name: Move the repo to charts
+      run: |
+        mkdir charts
+        find . -mindepth 1 -maxdepth 1 -name .git ! -name charts ! -name .cr-gpg -exec mv -t charts {} +
         
     - name: Add repositories
       run: |
@@ -67,8 +67,8 @@ jobs:
 
     - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
       uses: helm/chart-releaser-action@v1.7.0
-      with:
-        charts_dir: .
+      # with:
+      #   charts_dir: .
         
       env:
         CR_TOKEN: "${{ secrets.PAT }}"
