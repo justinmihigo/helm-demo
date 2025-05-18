@@ -1,0 +1,2628 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "architecture": {
+      "default": "standalone",
+      "description": "#\n#",
+      "required": [],
+      "title": "architecture",
+      "type": "string"
+    },
+    "auth": {
+      "additionalProperties": false,
+      "description": "# MySQL Authentication parameters\n#",
+      "properties": {
+        "createDatabase": {
+          "default": true,
+          "description": "#\n# ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-on-first-run\n#",
+          "required": [],
+          "title": "createDatabase",
+          "type": "boolean"
+        },
+        "customPasswordFiles": {
+          "additionalProperties": false,
+          "description": "#\n# Example:\n# customPasswordFiles:\n#   root: /vault/secrets/mysql-root\n#   user: /vault/secrets/mysql-user\n#   replicator: /vault/secrets/mysql-replicator\n#",
+          "required": [],
+          "title": "customPasswordFiles",
+          "type": "object"
+        },
+        "database": {
+          "default": "my_database",
+          "description": "#\n# ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-on-first-run\n#",
+          "required": [],
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "#\n# NOTE: When it's set the auth.rootPassword, auth.password, auth.replicationPassword are ignored.\n#",
+          "required": [],
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "password",
+          "type": "string"
+        },
+        "replicationPassword": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "replicationPassword",
+          "type": "string"
+        },
+        "replicationUser": {
+          "default": "replicator",
+          "description": "#\n# ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#setting-up-a-replication-cluster\n#",
+          "required": [],
+          "title": "replicationUser",
+          "type": "string"
+        },
+        "rootPassword": {
+          "default": "",
+          "description": "#\n# ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#setting-the-root-password-on-first-run\n#",
+          "required": [],
+          "title": "rootPassword",
+          "type": "string"
+        },
+        "usePasswordFiles": {
+          "default": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "usePasswordFiles",
+          "type": "boolean"
+        },
+        "username": {
+          "default": "",
+          "description": "#\n# ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-user-on-first-run\n#",
+          "required": [],
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rootPassword",
+        "createDatabase",
+        "database",
+        "username",
+        "password",
+        "replicationUser",
+        "replicationPassword",
+        "existingSecret",
+        "usePasswordFiles",
+        "customPasswordFiles"
+      ],
+      "title": "auth",
+      "type": "object"
+    },
+    "clusterDomain": {
+      "default": "cluster.local",
+      "description": "#\n#",
+      "required": [],
+      "title": "clusterDomain",
+      "type": "string"
+    },
+    "common": {
+      "description": "A Library Helm Chart for grouping common logic between bitnami charts. This chart is not deployable by itself.",
+      "properties": {
+        "exampleValue": {
+          "default": "common-chart",
+          "description": "# bitnami/common\n# It is required by CI/CD tools and processes.\n#\n#",
+          "required": [],
+          "title": "exampleValue",
+          "type": "string"
+        },
+        "global": {
+          "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+          "required": [],
+          "title": "global",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "common",
+      "type": "object"
+    },
+    "commonAnnotations": {
+      "additionalProperties": false,
+      "description": "#\n#",
+      "required": [],
+      "title": "commonAnnotations",
+      "type": "object"
+    },
+    "commonLabels": {
+      "additionalProperties": false,
+      "description": "#\n#",
+      "required": [],
+      "title": "commonLabels",
+      "type": "object"
+    },
+    "diagnosticMode": {
+      "additionalProperties": false,
+      "description": "# Enable diagnostic mode in the deployment\n#",
+      "properties": {
+        "args": {
+          "description": "#\n#",
+          "items": {
+            "anyOf": [
+              {
+                "required": [],
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "args",
+          "type": "array"
+        },
+        "command": {
+          "description": "#\n#",
+          "items": {
+            "anyOf": [
+              {
+                "required": [],
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "command",
+          "type": "array"
+        },
+        "enabled": {
+          "default": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "command",
+        "args"
+      ],
+      "title": "diagnosticMode",
+      "type": "object"
+    },
+    "extraDeploy": {
+      "description": "#\n#",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraDeploy",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "#\n#",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "additionalProperties": false,
+      "description": "#\n#\n#\n#",
+      "properties": {
+        "imagePullSecrets": {
+          "description": "# E.g.\n# imagePullSecrets:\n#   - myRegistryKeySecretName\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "imagePullSecrets",
+          "type": "array"
+        },
+        "imageRegistry": {
+          "default": "",
+          "required": [],
+          "title": "imageRegistry",
+          "type": "string"
+        },
+        "storageClass": {
+          "default": "",
+          "required": [],
+          "title": "storageClass",
+          "type": "string"
+        }
+      },
+      "required": [
+        "imageRegistry",
+        "imagePullSecrets",
+        "storageClass"
+      ],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "additionalProperties": false,
+      "description": "# Bitnami MySQL image\n# ref: https://hub.docker.com/r/bitnami/mysql/tags/\n#\n#\n#\n#\n#\n#\n#\n#",
+      "properties": {
+        "debug": {
+          "default": false,
+          "description": "# Set to true if you would like to see extra information on logs\n# It turns BASH and/or NAMI debugging in the image\n#",
+          "required": [],
+          "title": "debug",
+          "type": "boolean"
+        },
+        "digest": {
+          "default": "",
+          "required": [],
+          "title": "digest",
+          "type": "string"
+        },
+        "pullPolicy": {
+          "default": "IfNotPresent",
+          "description": "# Specify a imagePullPolicy\n# Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'\n# ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images\n#",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "pullSecrets": {
+          "description": "# Optionally specify an array of imagePullSecrets (secrets must be manually created in the namespace)\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/\n# Example:\n# pullSecrets:\n#   - myRegistryKeySecretName\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "pullSecrets",
+          "type": "array"
+        },
+        "registry": {
+          "default": "docker.io",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "bitnami/mysql",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "8.0.31-debian-11-r0",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "tag",
+        "digest",
+        "pullPolicy",
+        "pullSecrets",
+        "debug"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "initdbScripts": {
+      "additionalProperties": false,
+      "description": "#\n# Specify dictionary of scripts to be run at first boot\n# Example:\n# initdbScripts:\n#   my_init_script.sh: |\n#      #!/bin/bash\n#      echo \"Do something.\"\n#",
+      "required": [],
+      "title": "initdbScripts",
+      "type": "object"
+    },
+    "initdbScriptsConfigMap": {
+      "default": "",
+      "description": "#\n#",
+      "required": [],
+      "title": "initdbScriptsConfigMap",
+      "type": "string"
+    },
+    "kubeVersion": {
+      "default": "",
+      "description": "#\n#",
+      "required": [],
+      "title": "kubeVersion",
+      "type": "string"
+    },
+    "metrics": {
+      "additionalProperties": false,
+      "description": "# Mysqld Prometheus exporter parameters\n#",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "extraArgs": {
+          "additionalProperties": false,
+          "description": "#\n#\n# ref: https://github.com/prometheus/mysqld_exporter/\n# E.g.\n# - --collect.auto_increment.columns\n# - --collect.binlog_size\n# - --collect.engine_innodb_status\n# - --collect.engine_tokudb_status\n# - --collect.global_status\n# - --collect.global_variables\n# - --collect.info_schema.clientstats\n# - --collect.info_schema.innodb_metrics\n# - --collect.info_schema.innodb_tablespaces\n# - --collect.info_schema.innodb_cmp\n# - --collect.info_schema.innodb_cmpmem\n# - --collect.info_schema.processlist\n# - --collect.info_schema.processlist.min_time\n# - --collect.info_schema.query_response_time\n# - --collect.info_schema.tables\n# - --collect.info_schema.tables.databases\n# - --collect.info_schema.tablestats\n# - --collect.info_schema.userstats\n# - --collect.perf_schema.eventsstatements\n# - --collect.perf_schema.eventsstatements.digest_text_limit\n# - --collect.perf_schema.eventsstatements.limit\n# - --collect.perf_schema.eventsstatements.timelimit\n# - --collect.perf_schema.eventswaits\n# - --collect.perf_schema.file_events\n# - --collect.perf_schema.file_instances\n# - --collect.perf_schema.indexiowaits\n# - --collect.perf_schema.tableiowaits\n# - --collect.perf_schema.tablelocks\n# - --collect.perf_schema.replication_group_member_stats\n# - --collect.slave_status\n# - --collect.slave_hosts\n# - --collect.heartbeat\n# - --collect.heartbeat.database\n# - --collect.heartbeat.table\n#",
+          "properties": {
+            "primary": {
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "primary",
+              "type": "array"
+            },
+            "secondary": {
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "secondary",
+              "type": "array"
+            }
+          },
+          "required": [
+            "primary",
+            "secondary"
+          ],
+          "title": "extraArgs",
+          "type": "object"
+        },
+        "image": {
+          "additionalProperties": false,
+          "description": "#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "digest": {
+              "default": "",
+              "required": [],
+              "title": "digest",
+              "type": "string"
+            },
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "pullSecrets": {
+              "description": "# Optionally specify an array of imagePullSecrets.\n# Secrets must be manually created in the namespace.\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/\n# e.g:\n# pullSecrets:\n#   - myRegistryKeySecretName\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "pullSecrets",
+              "type": "array"
+            },
+            "registry": {
+              "default": "docker.io",
+              "required": [],
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "bitnami/mysqld-exporter",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "0.14.0-debian-11-r46",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "tag",
+            "digest",
+            "pullPolicy",
+            "pullSecrets"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "livenessProbe": {
+          "additionalProperties": false,
+          "description": "# Mysqld Prometheus exporter liveness probe\n# ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 120,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "successThreshold",
+            "failureThreshold"
+          ],
+          "title": "livenessProbe",
+          "type": "object"
+        },
+        "prometheusRule": {
+          "additionalProperties": false,
+          "description": "# Prometheus Operator prometheusRule configuration\n#",
+          "properties": {
+            "additionalLabels": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "additionalLabels",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "namespace": {
+              "default": "",
+              "description": "#\n#",
+              "required": [],
+              "title": "namespace",
+              "type": "string"
+            },
+            "rules": {
+              "description": "#\n#  - alert: Mysql-Down\n#    expr: absent(up{job=\"mysql\"} == 1)\n#    for: 5m\n#    labels:\n#      severity: warning\n#      service: mariadb\n#    annotations:\n#      message: 'MariaDB instance {{`{{`}} $labels.instance {{`}}`}}  is down'\n#      summary: MariaDB instance is down\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "rules",
+              "type": "array"
+            }
+          },
+          "required": [
+            "enabled",
+            "namespace",
+            "additionalLabels",
+            "rules"
+          ],
+          "title": "prometheusRule",
+          "type": "object"
+        },
+        "readinessProbe": {
+          "additionalProperties": false,
+          "description": "# Mysqld Prometheus exporter readiness probe\n# ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 30,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "successThreshold",
+            "failureThreshold"
+          ],
+          "title": "readinessProbe",
+          "type": "object"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "description": "# Mysqld Prometheus exporter resource requests and limits\n# ref: https://kubernetes.io/docs/user-guide/compute-resources/\n# We usually recommend not to specify default resources and to leave this as a conscious\n# choice for the user. This also increases chances charts run on environments with little\n# resources, such as Minikube. If you do want to specify resources, uncomment the following\n# lines, adjust them as necessary, and remove the curly braces after 'resources:'.\n#\n#\n#",
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "description": "# Example:\n# limits:\n#    cpu: 100m\n#    memory: 256Mi",
+              "required": [],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "description": "# Examples:\n# requests:\n#    cpu: 100m\n#    memory: 256Mi",
+              "required": [],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "service": {
+          "additionalProperties": false,
+          "description": "# MySQL Prometheus exporter service parameters\n# Mysqld Prometheus exporter liveness and readiness probes\n# ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes\n#\n#\n#\n#",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "properties": {
+                "prometheus.io/port": {
+                  "default": "{{ .Values.metrics.service.port }}",
+                  "required": [],
+                  "title": "prometheus.io/port",
+                  "type": "string"
+                },
+                "prometheus.io/scrape": {
+                  "default": "true",
+                  "required": [],
+                  "title": "prometheus.io/scrape",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "prometheus.io/scrape",
+                "prometheus.io/port"
+              ],
+              "title": "annotations",
+              "type": "object"
+            },
+            "port": {
+              "default": 9104,
+              "required": [],
+              "title": "port",
+              "type": "integer"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "port",
+            "annotations"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceMonitor": {
+          "additionalProperties": false,
+          "description": "# Prometheus Service Monitor\n# ref: https://github.com/coreos/prometheus-operator\n#",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "honorLabels": {
+              "default": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "honorLabels",
+              "type": "boolean"
+            },
+            "interval": {
+              "default": "30s",
+              "description": "#\n#",
+              "required": [],
+              "title": "interval",
+              "type": "string"
+            },
+            "jobLabel": {
+              "default": "",
+              "description": "#\n#",
+              "required": [],
+              "title": "jobLabel",
+              "type": "string"
+            },
+            "labels": {
+              "additionalProperties": false,
+              "description": "#\n# ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#prometheusspec\n#",
+              "required": [],
+              "title": "labels",
+              "type": "object"
+            },
+            "metricRelabelings": {
+              "description": "#\n# ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#relabelconfig\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "metricRelabelings",
+              "type": "array"
+            },
+            "namespace": {
+              "default": "",
+              "description": "#\n#",
+              "required": [],
+              "title": "namespace",
+              "type": "string"
+            },
+            "relabelings": {
+              "description": "#\n# ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#relabelconfig\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "relabelings",
+              "type": "array"
+            },
+            "scrapeTimeout": {
+              "default": "",
+              "description": "#\n# e.g:\n# scrapeTimeout: 30s\n#",
+              "required": [],
+              "title": "scrapeTimeout",
+              "type": "string"
+            },
+            "selector": {
+              "additionalProperties": false,
+              "description": "#\n# ref: https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#prometheus-configuration\n#\n# selector:\n#   prometheus: my-prometheus\n#",
+              "required": [],
+              "title": "selector",
+              "type": "object"
+            }
+          },
+          "required": [
+            "enabled",
+            "namespace",
+            "jobLabel",
+            "interval",
+            "scrapeTimeout",
+            "relabelings",
+            "metricRelabelings",
+            "selector",
+            "honorLabels",
+            "labels",
+            "annotations"
+          ],
+          "title": "serviceMonitor",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "image",
+        "service",
+        "extraArgs",
+        "resources",
+        "livenessProbe",
+        "readinessProbe",
+        "serviceMonitor",
+        "prometheusRule"
+      ],
+      "title": "metrics",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "#\n#",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "namespaceOverride": {
+      "default": "",
+      "description": "#\n#",
+      "required": [],
+      "title": "namespaceOverride",
+      "type": "string"
+    },
+    "networkPolicy": {
+      "additionalProperties": false,
+      "description": "# MySQL Nework Policy configuration\n#",
+      "properties": {
+        "allowExternal": {
+          "default": true,
+          "description": "#\n# When set to false, only pods with the correct\n# client label will have network access to the port MySQL is listening\n# on. When true, MySQL will accept connections from any source\n# (with the correct destination port).\n#",
+          "required": [],
+          "title": "allowExternal",
+          "type": "boolean"
+        },
+        "enabled": {
+          "default": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "explicitNamespacesSelector": {
+          "additionalProperties": false,
+          "description": "#\n# If explicitNamespacesSelector is missing or set to {}, only client Pods that are in the networkPolicy's namespace\n# and that match other criteria, the ones that have the good label, can reach the DB.\n# But sometimes, we want the DB to be accessible to clients from other namespaces, in this case, we can use this\n# LabelSelector to select these namespaces, note that the networkPolicy's namespace should also be explicitly added.\n#\n# Example:\n# explicitNamespacesSelector:\n#   matchLabels:\n#     role: frontend\n#   matchExpressions:\n#    - {key: role, operator: In, values: [frontend]}\n#",
+          "required": [],
+          "title": "explicitNamespacesSelector",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "allowExternal",
+        "explicitNamespacesSelector"
+      ],
+      "title": "networkPolicy",
+      "type": "object"
+    },
+    "primary": {
+      "additionalProperties": false,
+      "description": "#",
+      "properties": {
+        "affinity": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity\n# Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set\n#",
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "args": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "args",
+          "type": "array"
+        },
+        "command": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "command",
+          "type": "array"
+        },
+        "configuration": {
+          "default": "[mysqld]\ndefault_authentication_plugin=mysql_native_password\nskip-name-resolve\nexplicit_defaults_for_timestamp\nbasedir=/opt/bitnami/mysql\nplugin_dir=/opt/bitnami/mysql/lib/plugin\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\ndatadir=/bitnami/mysql/data\ntmpdir=/opt/bitnami/mysql/tmp\nmax_allowed_packet=16M\nbind-address=*\npid-file=/opt/bitnami/mysql/tmp/mysqld.pid\nlog-error=/opt/bitnami/mysql/logs/mysqld.log\ncharacter-set-server=UTF8\ncollation-server=utf8_general_ci\nslow_query_log=0\nslow_query_log_file=/opt/bitnami/mysql/logs/mysqld.log\nlong_query_time=10.0\n\n[client]\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\ndefault-character-set=UTF8\nplugin_dir=/opt/bitnami/mysql/lib/plugin\n\n[manager]\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\npid-file=/opt/bitnami/mysql/tmp/mysqld.pid",
+          "description": "#\n# ref: https://mysql.com/kb/en/mysql/configuring-mysql-with-mycnf/#example-of-configuration-file\n#",
+          "required": [],
+          "title": "configuration",
+          "type": "string"
+        },
+        "containerSecurityContext": {
+          "additionalProperties": false,
+          "description": "# MySQL primary container security context\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "runAsNonRoot": {
+              "default": true,
+              "required": [],
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 1001,
+              "required": [],
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "runAsUser",
+            "runAsNonRoot"
+          ],
+          "title": "containerSecurityContext",
+          "type": "object"
+        },
+        "customLivenessProbe": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "customLivenessProbe",
+          "type": "object"
+        },
+        "customReadinessProbe": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "customReadinessProbe",
+          "type": "object"
+        },
+        "customStartupProbe": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "customStartupProbe",
+          "type": "object"
+        },
+        "existingConfigmap": {
+          "default": "",
+          "description": "#\n# NOTE: When it's set the 'configuration' parameter is ignored\n#",
+          "required": [],
+          "title": "existingConfigmap",
+          "type": "string"
+        },
+        "extraEnvVars": {
+          "description": "#\n# E.g.\n# extraEnvVars:\n#  - name: TZ\n#    value: \"Europe/Paris\"\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraEnvVars",
+          "type": "array"
+        },
+        "extraEnvVarsCM": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "extraEnvVarsCM",
+          "type": "string"
+        },
+        "extraEnvVarsSecret": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "extraEnvVarsSecret",
+          "type": "string"
+        },
+        "extraFlags": {
+          "default": "",
+          "description": "#\n# Can be used to specify command line flags, for example:\n# E.g.\n# extraFlags: \"--max-connect-errors=1000 --max_connections=155\"\n#",
+          "required": [],
+          "title": "extraFlags",
+          "type": "string"
+        },
+        "extraVolumeMounts": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraVolumeMounts",
+          "type": "array"
+        },
+        "extraVolumes": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraVolumes",
+          "type": "array"
+        },
+        "hostAliases": {
+          "description": "#\n# https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "hostAliases",
+          "type": "array"
+        },
+        "initContainers": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "initContainers",
+          "type": "array"
+        },
+        "lifecycleHooks": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "lifecycleHooks",
+          "type": "object"
+        },
+        "livenessProbe": {
+          "additionalProperties": false,
+          "description": "# Configure extra options for liveness probe\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 5,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "failureThreshold",
+            "successThreshold"
+          ],
+          "title": "livenessProbe",
+          "type": "object"
+        },
+        "name": {
+          "default": "primary",
+          "description": "#\n#",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "nodeAffinityPreset": {
+          "additionalProperties": false,
+          "description": "# MySQL Primary node affinity preset\n# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity\n#",
+          "properties": {
+            "key": {
+              "default": "",
+              "description": "#\n# E.g.\n# key: \"kubernetes.io/e2e-az-name\"\n#",
+              "required": [],
+              "title": "key",
+              "type": "string"
+            },
+            "type": {
+              "default": "",
+              "description": "#\n#",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            },
+            "values": {
+              "description": "#\n# E.g.\n# values:\n#   - e2e-az1\n#   - e2e-az2\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "values",
+              "type": "array"
+            }
+          },
+          "required": [
+            "type",
+            "key",
+            "values"
+          ],
+          "title": "nodeAffinityPreset",
+          "type": "object"
+        },
+        "nodeSelector": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/user-guide/node-selection/\n#",
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "pdb": {
+          "additionalProperties": false,
+          "description": "# MySQL primary Pod Disruption Budget configuration\n# ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/\n#",
+          "properties": {
+            "create": {
+              "default": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            },
+            "maxUnavailable": {
+              "default": "",
+              "description": "#\n#",
+              "required": [],
+              "title": "maxUnavailable",
+              "type": "string"
+            },
+            "minAvailable": {
+              "default": 1,
+              "description": "#\n#",
+              "required": [],
+              "title": "minAvailable",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "create",
+            "minAvailable",
+            "maxUnavailable"
+          ],
+          "title": "pdb",
+          "type": "object"
+        },
+        "persistence": {
+          "additionalProperties": false,
+          "description": "# Enable persistence using Persistent Volume Claims\n# ref: https://kubernetes.io/docs/user-guide/persistent-volumes/\n#",
+          "properties": {
+            "accessModes": {
+              "description": "#\n#",
+              "items": {
+                "anyOf": [
+                  {
+                    "required": [],
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "accessModes",
+              "type": "array"
+            },
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "#\n#",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "existingClaim": {
+              "default": "",
+              "description": "#\n# NOTE: When it's set the rest of persistence parameters are ignored\n#",
+              "required": [],
+              "title": "existingClaim",
+              "type": "string"
+            },
+            "selector": {
+              "additionalProperties": false,
+              "description": "#\n# selector:\n#   matchLabels:\n#     app: my-app\n#",
+              "required": [],
+              "title": "selector",
+              "type": "object"
+            },
+            "size": {
+              "default": "8Gi",
+              "description": "#\n#",
+              "required": [],
+              "title": "size",
+              "type": "string"
+            },
+            "storageClass": {
+              "default": "",
+              "description": "#\n# If defined, storageClassName: \u003cstorageClass\u003e\n# If set to \"-\", storageClassName: \"\", which disables dynamic provisioning\n# If undefined (the default) or set to null, no storageClassName spec is\n#   set, choosing the default provisioner.  (gp2 on AWS, standard on\n#   GKE, AWS \u0026 OpenStack)\n#",
+              "required": [],
+              "title": "storageClass",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "existingClaim",
+            "storageClass",
+            "annotations",
+            "accessModes",
+            "size",
+            "selector"
+          ],
+          "title": "persistence",
+          "type": "object"
+        },
+        "podAffinityPreset": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity\n#",
+          "required": [],
+          "title": "podAffinityPreset",
+          "type": "string"
+        },
+        "podAnnotations": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/\n#",
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podAntiAffinityPreset": {
+          "default": "soft",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity\n#",
+          "required": [],
+          "title": "podAntiAffinityPreset",
+          "type": "string"
+        },
+        "podLabels": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "podLabels",
+          "type": "object"
+        },
+        "podManagementPolicy": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-management-policies\n#",
+          "required": [],
+          "title": "podManagementPolicy",
+          "type": "string"
+        },
+        "podSecurityContext": {
+          "additionalProperties": false,
+          "description": "# MySQL primary Pod security context\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "fsGroup": {
+              "default": 1001,
+              "required": [],
+              "title": "fsGroup",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "fsGroup"
+          ],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "priorityClassName": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "priorityClassName",
+          "type": "string"
+        },
+        "readinessProbe": {
+          "additionalProperties": false,
+          "description": "# Configure extra options for readiness probe\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 5,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "failureThreshold",
+            "successThreshold"
+          ],
+          "title": "readinessProbe",
+          "type": "object"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "description": "# MySQL primary container's resource requests and limits\n# ref: https://kubernetes.io/docs/user-guide/compute-resources/\n# We usually recommend not to specify default resources and to leave this as a conscious\n# choice for the user. This also increases chances charts run on environments with little\n# resources, such as Minikube. If you do want to specify resources, uncomment the following\n# lines, adjust them as necessary, and remove the curly braces after 'resources:'.\n#\n#\n#",
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "description": "# Example:\n# limits:\n#    cpu: 250m\n#    memory: 256Mi",
+              "required": [],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "description": "# Examples:\n# requests:\n#    cpu: 250m\n#    memory: 256Mi",
+              "required": [],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "schedulerName": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/\n#",
+          "required": [],
+          "title": "schedulerName",
+          "type": "string"
+        },
+        "service": {
+          "additionalProperties": false,
+          "description": "# MySQL Primary Service parameters\n#",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "clusterIP": {
+              "default": "",
+              "description": "#\n# e.g:\n# clusterIP: None\n#",
+              "required": [],
+              "title": "clusterIP",
+              "type": "string"
+            },
+            "externalTrafficPolicy": {
+              "default": "Cluster",
+              "description": "#\n# ref https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip\n#",
+              "required": [],
+              "title": "externalTrafficPolicy",
+              "type": "string"
+            },
+            "extraPorts": {
+              "description": "#\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraPorts",
+              "type": "array"
+            },
+            "headless": {
+              "additionalProperties": false,
+              "description": "# Headless service properties\n#",
+              "properties": {
+                "annotations": {
+                  "additionalProperties": false,
+                  "description": "#\n#",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "annotations"
+              ],
+              "title": "headless",
+              "type": "object"
+            },
+            "loadBalancerIP": {
+              "default": "",
+              "description": "#\n# Set the LoadBalancer service type to internal only\n# ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer\n#",
+              "required": [],
+              "title": "loadBalancerIP",
+              "type": "string"
+            },
+            "loadBalancerSourceRanges": {
+              "description": "#\n# https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service\n# E.g.\n# loadBalancerSourceRanges:\n#   - 10.10.10.0/24\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "loadBalancerSourceRanges",
+              "type": "array"
+            },
+            "nodePorts": {
+              "additionalProperties": false,
+              "description": "#\n# ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport\n#",
+              "properties": {
+                "mysql": {
+                  "default": "",
+                  "required": [],
+                  "title": "mysql",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "mysql"
+              ],
+              "title": "nodePorts",
+              "type": "object"
+            },
+            "ports": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "properties": {
+                "mysql": {
+                  "default": 3306,
+                  "required": [],
+                  "title": "mysql",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "mysql"
+              ],
+              "title": "ports",
+              "type": "object"
+            },
+            "sessionAffinity": {
+              "default": "None",
+              "description": "#\n# If \"ClientIP\", consecutive client requests will be directed to the same Pod\n# ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies\n#",
+              "required": [],
+              "title": "sessionAffinity",
+              "type": "string"
+            },
+            "sessionAffinityConfig": {
+              "additionalProperties": false,
+              "description": "#\n# sessionAffinityConfig:\n#   clientIP:\n#     timeoutSeconds: 300\n#",
+              "required": [],
+              "title": "sessionAffinityConfig",
+              "type": "object"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "description": "#\n#",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "ports",
+            "nodePorts",
+            "clusterIP",
+            "loadBalancerIP",
+            "externalTrafficPolicy",
+            "loadBalancerSourceRanges",
+            "extraPorts",
+            "annotations",
+            "sessionAffinity",
+            "sessionAffinityConfig",
+            "headless"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "sidecars": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "sidecars",
+          "type": "array"
+        },
+        "startupProbe": {
+          "additionalProperties": false,
+          "description": "# Configure extra options for startupProbe probe\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 10,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 15,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "failureThreshold",
+            "successThreshold"
+          ],
+          "title": "startupProbe",
+          "type": "object"
+        },
+        "terminationGracePeriodSeconds": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods\n#",
+          "required": [],
+          "title": "terminationGracePeriodSeconds",
+          "type": "string"
+        },
+        "tolerations": {
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tolerations",
+          "type": "array"
+        },
+        "topologySpreadConstraints": {
+          "description": "#\n# https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/\n# The value is evaluated as a template\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "topologySpreadConstraints",
+          "type": "array"
+        },
+        "updateStrategy": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies\n#",
+          "properties": {
+            "type": {
+              "default": "RollingUpdate",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "updateStrategy",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "command",
+        "args",
+        "lifecycleHooks",
+        "hostAliases",
+        "configuration",
+        "existingConfigmap",
+        "updateStrategy",
+        "podAnnotations",
+        "podAffinityPreset",
+        "podAntiAffinityPreset",
+        "nodeAffinityPreset",
+        "affinity",
+        "nodeSelector",
+        "tolerations",
+        "priorityClassName",
+        "schedulerName",
+        "terminationGracePeriodSeconds",
+        "topologySpreadConstraints",
+        "podManagementPolicy",
+        "podSecurityContext",
+        "containerSecurityContext",
+        "resources",
+        "livenessProbe",
+        "readinessProbe",
+        "startupProbe",
+        "customLivenessProbe",
+        "customReadinessProbe",
+        "customStartupProbe",
+        "extraFlags",
+        "extraEnvVars",
+        "extraEnvVarsCM",
+        "extraEnvVarsSecret",
+        "persistence",
+        "extraVolumes",
+        "extraVolumeMounts",
+        "initContainers",
+        "sidecars",
+        "service",
+        "pdb",
+        "podLabels"
+      ],
+      "title": "primary",
+      "type": "object"
+    },
+    "rbac": {
+      "additionalProperties": false,
+      "description": "# Role Based Access\n# ref: https://kubernetes.io/docs/admin/authorization/rbac/\n#",
+      "properties": {
+        "create": {
+          "default": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "rules": {
+          "description": "#\n# e.g:\n# rules:\n#   - apiGroups:\n#       - \"\"\n#     resources:\n#       - pods\n#     verbs:\n#       - get\n#       - list\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "rules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "create",
+        "rules"
+      ],
+      "title": "rbac",
+      "type": "object"
+    },
+    "secondary": {
+      "additionalProperties": false,
+      "description": "#",
+      "properties": {
+        "affinity": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity\n# Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set\n#",
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "args": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "args",
+          "type": "array"
+        },
+        "command": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "command",
+          "type": "array"
+        },
+        "configuration": {
+          "default": "[mysqld]\ndefault_authentication_plugin=mysql_native_password\nskip-name-resolve\nexplicit_defaults_for_timestamp\nbasedir=/opt/bitnami/mysql\nplugin_dir=/opt/bitnami/mysql/lib/plugin\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\ndatadir=/bitnami/mysql/data\ntmpdir=/opt/bitnami/mysql/tmp\nmax_allowed_packet=16M\nbind-address=*\npid-file=/opt/bitnami/mysql/tmp/mysqld.pid\nlog-error=/opt/bitnami/mysql/logs/mysqld.log\ncharacter-set-server=UTF8\ncollation-server=utf8_general_ci\nslow_query_log=0\nslow_query_log_file=/opt/bitnami/mysql/logs/mysqld.log\nlong_query_time=10.0\n\n[client]\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\ndefault-character-set=UTF8\nplugin_dir=/opt/bitnami/mysql/lib/plugin\n\n[manager]\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\npid-file=/opt/bitnami/mysql/tmp/mysqld.pid",
+          "description": "#\n# ref: https://mysql.com/kb/en/mysql/configuring-mysql-with-mycnf/#example-of-configuration-file\n#",
+          "required": [],
+          "title": "configuration",
+          "type": "string"
+        },
+        "containerSecurityContext": {
+          "additionalProperties": false,
+          "description": "# MySQL secondary container security context\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "runAsNonRoot": {
+              "default": true,
+              "required": [],
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 1001,
+              "required": [],
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "runAsUser",
+            "runAsNonRoot"
+          ],
+          "title": "containerSecurityContext",
+          "type": "object"
+        },
+        "customLivenessProbe": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "customLivenessProbe",
+          "type": "object"
+        },
+        "customReadinessProbe": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "customReadinessProbe",
+          "type": "object"
+        },
+        "customStartupProbe": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "customStartupProbe",
+          "type": "object"
+        },
+        "existingConfigmap": {
+          "default": "",
+          "description": "#\n# NOTE: When it's set the 'configuration' parameter is ignored\n#",
+          "required": [],
+          "title": "existingConfigmap",
+          "type": "string"
+        },
+        "extraEnvVars": {
+          "description": "#\n# E.g.\n# extraEnvVars:\n#  - name: TZ\n#    value: \"Europe/Paris\"\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraEnvVars",
+          "type": "array"
+        },
+        "extraEnvVarsCM": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "extraEnvVarsCM",
+          "type": "string"
+        },
+        "extraEnvVarsSecret": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "extraEnvVarsSecret",
+          "type": "string"
+        },
+        "extraFlags": {
+          "default": "",
+          "description": "#\n# Can be used to specify command line flags, for example:\n# E.g.\n# extraFlags: \"--max-connect-errors=1000 --max_connections=155\"\n#",
+          "required": [],
+          "title": "extraFlags",
+          "type": "string"
+        },
+        "extraVolumeMounts": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraVolumeMounts",
+          "type": "array"
+        },
+        "extraVolumes": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraVolumes",
+          "type": "array"
+        },
+        "hostAliases": {
+          "description": "#\n# https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "hostAliases",
+          "type": "array"
+        },
+        "initContainers": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "initContainers",
+          "type": "array"
+        },
+        "lifecycleHooks": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "lifecycleHooks",
+          "type": "object"
+        },
+        "livenessProbe": {
+          "additionalProperties": false,
+          "description": "# Configure extra options for liveness probe\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 5,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "failureThreshold",
+            "successThreshold"
+          ],
+          "title": "livenessProbe",
+          "type": "object"
+        },
+        "name": {
+          "default": "secondary",
+          "description": "#\n#",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "nodeAffinityPreset": {
+          "additionalProperties": false,
+          "description": "# MySQL Secondary node affinity preset\n# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity\n#",
+          "properties": {
+            "key": {
+              "default": "",
+              "description": "#\n# E.g.\n# key: \"kubernetes.io/e2e-az-name\"\n#",
+              "required": [],
+              "title": "key",
+              "type": "string"
+            },
+            "type": {
+              "default": "",
+              "description": "#\n#",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            },
+            "values": {
+              "description": "#\n# E.g.\n# values:\n#   - e2e-az1\n#   - e2e-az2\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "values",
+              "type": "array"
+            }
+          },
+          "required": [
+            "type",
+            "key",
+            "values"
+          ],
+          "title": "nodeAffinityPreset",
+          "type": "object"
+        },
+        "nodeSelector": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/user-guide/node-selection/\n#",
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "pdb": {
+          "additionalProperties": false,
+          "description": "# MySQL secondary Pod Disruption Budget configuration\n# ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/\n#",
+          "properties": {
+            "create": {
+              "default": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            },
+            "maxUnavailable": {
+              "default": "",
+              "description": "#\n#",
+              "required": [],
+              "title": "maxUnavailable",
+              "type": "string"
+            },
+            "minAvailable": {
+              "default": 1,
+              "description": "#\n#",
+              "required": [],
+              "title": "minAvailable",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "create",
+            "minAvailable",
+            "maxUnavailable"
+          ],
+          "title": "pdb",
+          "type": "object"
+        },
+        "persistence": {
+          "additionalProperties": false,
+          "description": "# Enable persistence using Persistent Volume Claims\n# ref: https://kubernetes.io/docs/user-guide/persistent-volumes/\n#",
+          "properties": {
+            "accessModes": {
+              "description": "#\n#",
+              "items": {
+                "anyOf": [
+                  {
+                    "required": [],
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "accessModes",
+              "type": "array"
+            },
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "#\n#",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "selector": {
+              "additionalProperties": false,
+              "description": "#\n# selector:\n#   matchLabels:\n#     app: my-app\n#",
+              "required": [],
+              "title": "selector",
+              "type": "object"
+            },
+            "size": {
+              "default": "8Gi",
+              "description": "#\n#",
+              "required": [],
+              "title": "size",
+              "type": "string"
+            },
+            "storageClass": {
+              "default": "",
+              "description": "#\n# If defined, storageClassName: \u003cstorageClass\u003e\n# If set to \"-\", storageClassName: \"\", which disables dynamic provisioning\n# If undefined (the default) or set to null, no storageClassName spec is\n#   set, choosing the default provisioner.  (gp2 on AWS, standard on\n#   GKE, AWS \u0026 OpenStack)\n#",
+              "required": [],
+              "title": "storageClass",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "storageClass",
+            "annotations",
+            "accessModes",
+            "size",
+            "selector"
+          ],
+          "title": "persistence",
+          "type": "object"
+        },
+        "podAffinityPreset": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity\n#",
+          "required": [],
+          "title": "podAffinityPreset",
+          "type": "string"
+        },
+        "podAnnotations": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/\n#",
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podAntiAffinityPreset": {
+          "default": "soft",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity\n# Allowed values: soft, hard\n#",
+          "required": [],
+          "title": "podAntiAffinityPreset",
+          "type": "string"
+        },
+        "podLabels": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "podLabels",
+          "type": "object"
+        },
+        "podManagementPolicy": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-management-policies\n#",
+          "required": [],
+          "title": "podManagementPolicy",
+          "type": "string"
+        },
+        "podSecurityContext": {
+          "additionalProperties": false,
+          "description": "# MySQL secondary Pod security context\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "fsGroup": {
+              "default": 1001,
+              "required": [],
+              "title": "fsGroup",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "fsGroup"
+          ],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "priorityClassName": {
+          "default": "",
+          "description": "#\n#",
+          "required": [],
+          "title": "priorityClassName",
+          "type": "string"
+        },
+        "readinessProbe": {
+          "additionalProperties": false,
+          "description": "# Configure extra options for readiness probe\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 5,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "failureThreshold",
+            "successThreshold"
+          ],
+          "title": "readinessProbe",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "description": "#\n#",
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "description": "# MySQL secondary container's resource requests and limits\n# ref: https://kubernetes.io/docs/user-guide/compute-resources/\n# We usually recommend not to specify default resources and to leave this as a conscious\n# choice for the user. This also increases chances charts run on environments with little\n# resources, such as Minikube. If you do want to specify resources, uncomment the following\n# lines, adjust them as necessary, and remove the curly braces after 'resources:'.\n#\n#\n#",
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "description": "# Example:\n# limits:\n#    cpu: 250m\n#    memory: 256Mi",
+              "required": [],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "description": "# Examples:\n# requests:\n#    cpu: 250m\n#    memory: 256Mi",
+              "required": [],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "schedulerName": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/\n#",
+          "required": [],
+          "title": "schedulerName",
+          "type": "string"
+        },
+        "service": {
+          "additionalProperties": false,
+          "description": "# MySQL Secondary Service parameters\n#",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "clusterIP": {
+              "default": "",
+              "description": "#\n# e.g:\n# clusterIP: None\n#",
+              "required": [],
+              "title": "clusterIP",
+              "type": "string"
+            },
+            "externalTrafficPolicy": {
+              "default": "Cluster",
+              "description": "#\n# ref https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip\n#",
+              "required": [],
+              "title": "externalTrafficPolicy",
+              "type": "string"
+            },
+            "extraPorts": {
+              "description": "#\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraPorts",
+              "type": "array"
+            },
+            "headless": {
+              "additionalProperties": false,
+              "description": "# Headless service properties\n#",
+              "properties": {
+                "annotations": {
+                  "additionalProperties": false,
+                  "description": "#\n#",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "annotations"
+              ],
+              "title": "headless",
+              "type": "object"
+            },
+            "loadBalancerIP": {
+              "default": "",
+              "description": "#\n# Set the LoadBalancer service type to internal only\n# ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer\n#",
+              "required": [],
+              "title": "loadBalancerIP",
+              "type": "string"
+            },
+            "loadBalancerSourceRanges": {
+              "description": "#\n# https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service\n# E.g.\n# loadBalancerSourceRanges:\n#   - 10.10.10.0/24\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "loadBalancerSourceRanges",
+              "type": "array"
+            },
+            "nodePorts": {
+              "additionalProperties": false,
+              "description": "#\n# ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport\n#",
+              "properties": {
+                "mysql": {
+                  "default": "",
+                  "required": [],
+                  "title": "mysql",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "mysql"
+              ],
+              "title": "nodePorts",
+              "type": "object"
+            },
+            "ports": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "properties": {
+                "mysql": {
+                  "default": 3306,
+                  "required": [],
+                  "title": "mysql",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "mysql"
+              ],
+              "title": "ports",
+              "type": "object"
+            },
+            "sessionAffinity": {
+              "default": "None",
+              "description": "#\n# If \"ClientIP\", consecutive client requests will be directed to the same Pod\n# ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies\n#",
+              "required": [],
+              "title": "sessionAffinity",
+              "type": "string"
+            },
+            "sessionAffinityConfig": {
+              "additionalProperties": false,
+              "description": "#\n# sessionAffinityConfig:\n#   clientIP:\n#     timeoutSeconds: 300\n#",
+              "required": [],
+              "title": "sessionAffinityConfig",
+              "type": "object"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "description": "#\n#",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "ports",
+            "nodePorts",
+            "clusterIP",
+            "loadBalancerIP",
+            "externalTrafficPolicy",
+            "loadBalancerSourceRanges",
+            "extraPorts",
+            "annotations",
+            "sessionAffinity",
+            "sessionAffinityConfig",
+            "headless"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "sidecars": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "sidecars",
+          "type": "array"
+        },
+        "startupProbe": {
+          "additionalProperties": false,
+          "description": "# Configure extra options for startupProbe probe\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 15,
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 15,
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "timeoutSeconds",
+            "failureThreshold",
+            "successThreshold"
+          ],
+          "title": "startupProbe",
+          "type": "object"
+        },
+        "terminationGracePeriodSeconds": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods\n#",
+          "required": [],
+          "title": "terminationGracePeriodSeconds",
+          "type": "string"
+        },
+        "tolerations": {
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tolerations",
+          "type": "array"
+        },
+        "topologySpreadConstraints": {
+          "description": "#\n# https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/\n# The value is evaluated as a template\n#",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "topologySpreadConstraints",
+          "type": "array"
+        },
+        "updateStrategy": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies\n#",
+          "properties": {
+            "type": {
+              "default": "RollingUpdate",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "updateStrategy",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "replicaCount",
+        "hostAliases",
+        "command",
+        "args",
+        "lifecycleHooks",
+        "configuration",
+        "existingConfigmap",
+        "updateStrategy",
+        "podAnnotations",
+        "podAffinityPreset",
+        "podAntiAffinityPreset",
+        "nodeAffinityPreset",
+        "affinity",
+        "nodeSelector",
+        "tolerations",
+        "priorityClassName",
+        "schedulerName",
+        "terminationGracePeriodSeconds",
+        "topologySpreadConstraints",
+        "podManagementPolicy",
+        "podSecurityContext",
+        "containerSecurityContext",
+        "resources",
+        "livenessProbe",
+        "readinessProbe",
+        "startupProbe",
+        "customLivenessProbe",
+        "customReadinessProbe",
+        "customStartupProbe",
+        "extraFlags",
+        "extraEnvVars",
+        "extraEnvVarsCM",
+        "extraEnvVarsSecret",
+        "persistence",
+        "extraVolumes",
+        "extraVolumeMounts",
+        "initContainers",
+        "sidecars",
+        "service",
+        "pdb",
+        "podLabels"
+      ],
+      "title": "secondary",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "additionalProperties": false,
+      "description": "# MySQL pods ServiceAccount\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/\n#",
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "automountServiceAccountToken": {
+          "default": true,
+          "description": "#\n#",
+          "required": [],
+          "title": "automountServiceAccountToken",
+          "type": "boolean"
+        },
+        "create": {
+          "default": true,
+          "description": "#\n#",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "#\n# If not set and create is true, a name is generated using the mysql.fullname template\n#",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "name",
+        "annotations",
+        "automountServiceAccountToken"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "volumePermissions": {
+      "additionalProperties": false,
+      "description": "# Init containers parameters:\n# volumePermissions: Change the owner and group of the persistent volume mountpoint to runAsUser:fsGroup values from the securityContext section.\n#",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "image": {
+          "additionalProperties": false,
+          "description": "#\n#\n#\n#\n#\n#\n#",
+          "properties": {
+            "digest": {
+              "default": "",
+              "required": [],
+              "title": "digest",
+              "type": "string"
+            },
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "pullSecrets": {
+              "description": "# Optionally specify an array of imagePullSecrets.\n# Secrets must be manually created in the namespace.\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/\n# e.g:\n# pullSecrets:\n#   - myRegistryKeySecretName\n#",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "pullSecrets",
+              "type": "array"
+            },
+            "registry": {
+              "default": "docker.io",
+              "required": [],
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "bitnami/bitnami-shell",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "11-debian-11-r40",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "tag",
+            "digest",
+            "pullPolicy",
+            "pullSecrets"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "resources",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "image",
+        "resources"
+      ],
+      "title": "volumePermissions",
+      "type": "object"
+    }
+  },
+  "required": [
+    "global",
+    "kubeVersion",
+    "nameOverride",
+    "fullnameOverride",
+    "namespaceOverride",
+    "clusterDomain",
+    "commonAnnotations",
+    "commonLabels",
+    "extraDeploy",
+    "diagnosticMode",
+    "image",
+    "architecture",
+    "auth",
+    "initdbScripts",
+    "initdbScriptsConfigMap",
+    "primary",
+    "secondary",
+    "serviceAccount",
+    "rbac",
+    "networkPolicy",
+    "volumePermissions",
+    "metrics"
+  ],
+  "type": "object"
+}
