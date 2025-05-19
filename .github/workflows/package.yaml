@@ -34,9 +34,11 @@ jobs:
     
     - name: Prepare GPG key #this step is for using exported keys and make your github runner
       run: |
-        echo "kali" > passphrase #storing passphrase data into a file
-        cat passphrase
-        echo "${{secrets.SECRING_BASE64}}" | base64 -d > ~/.gnupg/secring.gpg
+        gpg_dir=.cr-gpg
+        mkdir $gpg_dir
+        echo "$GPG_PASSPHRASE" > .cr-gpg/passphrase #storing passphrase data into a file
+        cat .cr-gpg/passphrase
+        echo "${{secrets.SECRING_BASE64}}" | base64 -d > .cr-gpg/secring.gpg
 
       env:
         GPG_KEYRING_BASE64: "${{ secrets.GPG_PRIVATE_KEY }}" #Referring secrets of github above
@@ -45,15 +47,15 @@ jobs:
     - name: List files in gnupg
       run: |
         ls -la
-        file passphrase
-        file ~/.gnupg/secring.gpg
+        file .cr-gpg/passphrase
+        file .cr-gpg/secring.gpg
         wc passphrase
         gpg --list-keys
 
 
     - name: Create secring.pgp to sign
       run: |
-        gpg --export > ~/.gnupg/pubring.gpg
+        gpg --export > .cr-gpg/pubring.gpg
     #     gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> ~/.gnupg/secring.gpg
     #     # cp .cr-gpg/secring.gpg ~/.gnupg/secring.gpg
     
@@ -69,8 +71,8 @@ jobs:
 
     - name: Characteristics for secring.gpg
       run: |
-        file ~/.gnupg/secring.gpg
-        wc ~/.gnupg/secring.gpg
+        file .cr-gpg/secring.gpg
+        wc .cr-gpg/secring.gpg
         gpg --list-keys
 
         
@@ -81,31 +83,31 @@ jobs:
     #     done
       
     - name: Dependency update
-      run: helm dependency update
-        
-    - name: Sign the package
       run: |
-        helm package  --sign --key Mihigo --keyring ~/.gnupg/secring.gpg . --passphrase-file passphrase
-    
-    - name: Upload the artifact to github
-      uses: actions/upload-artifact@v4.3.0
-      with:
-        name: mychart-release
-        path: |
-          ./*tgz
-          ./*prov
-
-    # - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
-    #   uses: helm/chart-releaser-action@v1.7.0
-    #   # with:
-    #   #   charts_dir: .
+        cd charts
+        helm dependency update
         
-    #   env:
-    #     CR_TOKEN: "${{ secrets.PAT }}"
-        # CR_KEY: "${{ secrets.CR_KEY }}" #Key name used while creating key
-        # CR_SIGN: true
-        # CR_SKIP_EXISTING: false
-        # CR_MARK_AS_LATEST: true
+    # - name: Sign the package
+    #   run: |
+    #     helm package  --sign --key Mihigo --keyring ~/.gnupg/secring.gpg . --passphrase-file passphrase
+    
+    # - name: Upload the artifact to github
+    #   uses: actions/upload-artifact@v4.3.0
+    #   with:
+    #     name: mychart-release
+    #     path: |
+    #       ./*tgz
+    #       ./*prov
+
+    - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
+      uses: helm/chart-releaser-action@v1.7.0
+        
+      env:
+        CR_TOKEN: "${{ secrets.PAT }}"
+        CR_KEY: "${{ secrets.CR_KEY }}" #Key name used while creating key
+        CR_SIGN: true
+        CR_SKIP_EXISTING: false
+        CR_MARK_AS_LATEST: true
 
 
 
