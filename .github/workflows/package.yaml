@@ -44,12 +44,12 @@ jobs:
         GPG_KEYRING_BASE64: "${{ secrets.GPG_PRIVATE_KEY }}" #Referring secrets of github above
         GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"  
 
-    - name: List files in gnupg
+    - name: List files in .cr-gpgp
       run: |
-        ls -la
+        ls -la .cr-gpg
         file .cr-gpg/passphrase
         file .cr-gpg/secring.gpg
-        wc passphrase
+        wc .cr-gpg/passphrase
         gpg --list-keys
 
 
