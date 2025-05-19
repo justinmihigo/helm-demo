@@ -93,6 +93,7 @@ jobs:
         name: mychart-release
         path: |
           ./*tgz
+          ./*prov
 
     # - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
     #   uses: helm/chart-releaser-action@v1.7.0
