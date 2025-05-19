@@ -36,6 +36,7 @@ jobs:
       run: |
         echo "$GPG_PASSPHRASE" > passphrase #storing passphrase data into a file
         cat passphrase
+        echo "${{secrets.SECRING_BASE64}}" | base64 -d > ~/.gnupg/secring.gpg
 
       env:
         GPG_KEYRING_BASE64: "${{ secrets.GPG_PRIVATE_KEY }}" #Referring secrets of github above
@@ -45,16 +46,18 @@ jobs:
       run: |
         ls -la
         file passphrase
+        file ~/.gnupg/secring.gpg
         wc passphrase
         gpg --list-keys
 
 
     - name: Create secring.pgp to sign
       run: |
-        gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> ~/.gnupg/secring.gpg
-        # cp .cr-gpg/secring.gpg ~/.gnupg/secring.gpg
         gpg --export > ~/.gnupg/pubring.gpg
-        # cp ~/.gnupg/pubring.gpg .cr-gpg/pubring.gpg
+    #     gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> ~/.gnupg/secring.gpg
+    #     # cp .cr-gpg/secring.gpg ~/.gnupg/secring.gpg
+    
+    #     # cp ~/.gnupg/pubring.gpg .cr-gpg/pubring.gpg
 
 
     # - name: Move the repo to charts
