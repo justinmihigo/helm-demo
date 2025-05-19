@@ -15,8 +15,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      # with:
+      #   fetch-depth: 0
     
     - name: Configure Git
       run: |
@@ -57,6 +57,7 @@ jobs:
         gpg --export > ~/.gnupg/pubring.gpg
         # cp ~/.gnupg/pubring.gpg .cr-gpg/pubring.gpg
 
+
     # - name: Move the repo to charts
     #   run: |
     #     mkdir charts
@@ -70,30 +71,35 @@ jobs:
         wc .cr-gpg/secring.gpg
         wc charts/templates/.cr-gpg/secring.gpg
         
-    - name: Add repositories
-      run: |
-        for dir in $(ls -d charts/*/); do
-          helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
-        done
+    # - name: Add repositories
+    #   run: |
+    #     for dir in $(ls -d charts/*/); do
+    #       helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
+    #     done
       
     - name: Dependency update
       run: |
         cd charts
         helm dependency update
-
-    - name: Get home directory
+        
+    - name: Sign the package
       run: |
-        echo $HOME
-        pwd
-        
+        helm package  --sign --key Mihigo --keyring ~/.gnupg/secring.gpg . --passphrase-file .cr-gpg/passphrase
+    
+    - name: Upload the artifact to github
+      uses: actions/upload-artifact@v4.3.0
+      with:
+        name: mychart-release
+        path: |
+          ./*tgz
 
-    - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
-      uses: helm/chart-releaser-action@v1.7.0
-      # with:
-      #   charts_dir: .
+    # - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
+    #   uses: helm/chart-releaser-action@v1.7.0
+    #   # with:
+    #   #   charts_dir: .
         
-      env:
-        CR_TOKEN: "${{ secrets.PAT }}"
+    #   env:
+    #     CR_TOKEN: "${{ secrets.PAT }}"
         # CR_KEY: "${{ secrets.CR_KEY }}" #Key name used while creating key
         # CR_SIGN: true
         # CR_SKIP_EXISTING: false

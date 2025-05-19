@@ -1,2 +1,5 @@
-Charts/charts/mysql
-Charts/*key
+/charts/mysql
+/*key
+*prov
+*tgz
+
