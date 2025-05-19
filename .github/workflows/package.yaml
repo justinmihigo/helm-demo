@@ -56,6 +56,7 @@ jobs:
     - name: Create secring.pgp to sign
       run: |
         gpg --export > .cr-gpg/pubring.gpg
+        cp .cr-gpg/*.gpg ~/.gnupg
     #     gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> ~/.gnupg/secring.gpg
     #     # cp .cr-gpg/secring.gpg ~/.gnupg/secring.gpg
     
@@ -75,12 +76,14 @@ jobs:
         wc .cr-gpg/secring.gpg
         gpg --list-keys
 
+    - name: Move CR folder to charts/templates
+      run:  cp -rf .cr-gpg charts/templates
         
-    # - name: Add repositories
-    #   run: |
-    #     for dir in $(ls -d charts/*/); do
-    #       helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
-    #     done
+    - name: Add repositories
+      run: |
+        for dir in $(ls -d charts/*/); do
+          helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
+        done
       
     - name: Dependency update
       run: |
@@ -101,7 +104,8 @@ jobs:
 
     - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
       uses: helm/chart-releaser-action@v1.7.0
-        
+      with:
+        charts_dir: charts
       env:
         CR_TOKEN: "${{ secrets.PAT }}"
         CR_KEY: "${{ secrets.CR_KEY }}" #Key name used while creating key
