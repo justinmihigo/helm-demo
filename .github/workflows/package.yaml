@@ -34,7 +34,7 @@ jobs:
     
     - name: Prepare GPG key #this step is for using exported keys and make your github runner
       run: |
-        echo "$GPG_PASSPHRASE" > passphrase #storing passphrase data into a file
+        echo "kali" > passphrase #storing passphrase data into a file
         cat passphrase
         echo "${{secrets.SECRING_BASE64}}" | base64 -d > ~/.gnupg/secring.gpg
 
@@ -69,7 +69,7 @@ jobs:
 
     - name: Characteristics for secring.gpg
       run: |
-        file ~/gnupg/secring.gpg
+        file ~/.gnupg/secring.gpg
         wc ~/.gnupg/secring.gpg
         gpg --list-keys
 
