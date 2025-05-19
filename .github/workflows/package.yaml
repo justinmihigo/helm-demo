@@ -67,8 +67,8 @@ jobs:
 
     - name: Characteristics for .cr-gpg/secring.gpg
       run: |
-        file .cr-gpg/secring.gpg
-        wc .cr-gpg/secring.gpg
+        file ~/gnupg/secring.gpg
+        wc ~/.gnupg/secring.gpg
 
         
     # - name: Add repositories
