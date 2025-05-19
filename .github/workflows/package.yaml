@@ -78,9 +78,7 @@ jobs:
     #     done
       
     - name: Dependency update
-      run: |
-        cd charts
-        helm dependency update
+      run: helm dependency update
         
     - name: Sign the package
       run: |
