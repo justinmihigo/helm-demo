@@ -30,7 +30,7 @@ jobs:
 
     - name: Import GPG private key
       run: |
-        echo "${{ secrets.GPG_PK }}" | gpg --batch --import
+        echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 -d | gpg --batch --import
     
     - name: Prepare GPG key #this step is for using exported keys and make your github runner
       run: |
@@ -40,6 +40,7 @@ jobs:
         # base64 -d charts/pk.base64 > "$keyring"
         passphrase_file="$gpg_dir/passphrase"
         echo "$GPG_PASSPHRASE" > "$passphrase_file" #storing passphrase data into a file
+        cat passphrase_file
         echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV" #saving passphrase into github-environment
         echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV" #saving private key into github-environemnt
       env:
@@ -52,8 +53,8 @@ jobs:
 
     - name: Create secring.pgp to sign
       run: |
-        gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> .cr-gpg/secring.gpg
-        cp .cr-gpg/secring.gpg ~/.gnupg/secring.gpg
+        gpg --export-secret-key --pinentry-mode=loopback --yes --passphrase "kali"> ~/.gnupg/secring.gpg
+        # cp .cr-gpg/secring.gpg ~/.gnupg/secring.gpg
         gpg --export > ~/.gnupg/pubring.gpg
         # cp ~/.gnupg/pubring.gpg .cr-gpg/pubring.gpg
 
@@ -65,10 +66,11 @@ jobs:
     # - name: Move CR folder to charts/templates
     #   run:  cp -rf .cr-gpg charts/templates
 
-    - name: Characteristics for .cr-gpg/secring.gpg
+    - name: Characteristics for secring.gpg
       run: |
         file ~/gnupg/secring.gpg
         wc ~/.gnupg/secring.gpg
+        gpg --list-keys
 
         
     # - name: Add repositories
