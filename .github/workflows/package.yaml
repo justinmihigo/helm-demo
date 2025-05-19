@@ -62,14 +62,14 @@ jobs:
     #   run: |
     #     mkdir charts
     #     find . -mindepth 1 -maxdepth 1 -name .git ! -name charts ! -name .cr-gpg -exec mv -t charts {} +
-    - name: Move CR folder to charts/templates
-      run:  cp -rf .cr-gpg charts/templates
+    # - name: Move CR folder to charts/templates
+    #   run:  cp -rf .cr-gpg charts/templates
 
     - name: Characteristics for .cr-gpg/secring.gpg
       run: |
-        file charts/templates/.cr-gpg/secring.gpg
+        file .cr-gpg/secring.gpg
         wc .cr-gpg/secring.gpg
-        wc charts/templates/.cr-gpg/secring.gpg
+
         
     # - name: Add repositories
     #   run: |
