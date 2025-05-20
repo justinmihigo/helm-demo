@@ -3,6 +3,20 @@ entries:
   mychart:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-05-20T09:39:58.989564584Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.1
+    description: A Helm chart for Kubernetes
+    digest: c6dece8b3a5b37e14312f6ed5ae9c948f028e26e57848817a0cce7a7f05dcff0
+    name: mychart
+    type: application
+    urls:
+    - https://github.com/justinmihigo/helm-demo/releases/download/mychart-0.1.2/mychart-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-05-19T13:04:45.179050802Z"
     dependencies:
     - name: mysql
@@ -15,4 +29,4 @@ entries:
     urls:
     - https://github.com/justinmihigo/helm-demo/releases/download/mychart-0.1.0/mychart-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-19T13:04:45.179059628Z"
+generated: "2025-05-20T09:39:58.989571677Z"
