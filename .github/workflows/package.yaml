@@ -75,11 +75,6 @@ jobs:
       run: |
         cd charts/templates
         helm dependency update
-
-    - name: Get home directory
-      run: |
-        echo $HOME
-        pwd
         
 
     - name: Run chart-releaser #this is used to generate new version of helm chart along with some file with extension .prov
