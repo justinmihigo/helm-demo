@@ -10,7 +10,7 @@ spec:
     - ReadWriteOnce
   claimRef:
     namespace: demo
-    name: data-{{ include "mychart.fullname" . }}-mysql-0
+    name: data-{{ .Release.Name }}-mysql-0
   persistentVolumeReclaimPolicy: Delete
   storageClassName: {{ include "mychart.fullname" . }}
   local:
