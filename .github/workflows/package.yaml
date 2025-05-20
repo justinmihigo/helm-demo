@@ -88,8 +88,8 @@ jobs:
         CR_TOKEN: "${{ secrets.PAT }}"
         CR_KEY: "${{ secrets.CR_KEY }}" #Key name used while creating key
         CR_SIGN: true
-        CR_SKIP_EXISTING: false
-        CR_MARK_AS_LATEST: true
+        CR_SKIP_EXISTING: true
+        # CR_MARK_AS_LATEST: true
 
 
 
