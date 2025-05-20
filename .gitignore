@@ -1,2 +1,4 @@
-Charts/charts/mysql
-Charts/*key
+charts/charts/mysql
+charts/*key
+charts/*.tgz.prov
+charts/*.tgz
