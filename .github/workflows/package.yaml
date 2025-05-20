@@ -59,7 +59,7 @@ jobs:
     - name: Move CR folder to charts/templates
       run:  |
         cp -rf .cr-gpg charts/templates
-        cp Chart.yaml templates
+        cp charts/Chart.yaml templates
 
     - name: Characteristics for .cr-gpg/secring.gpg
       run: |
