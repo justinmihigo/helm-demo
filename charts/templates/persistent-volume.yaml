@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   claimRef:
-    namespace: demo
+    namespace: {{.Release.NameSpace}}
     name: data-{{ .Release.Name }}-mysql-0
   persistentVolumeReclaimPolicy: Delete
   storageClassName: {{ include "mychart.fullname" . }}
